@@ -75,16 +75,16 @@ WSGI_APPLICATION = 'narutocity_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# mysql配置文件，仅存放在本地
+from mysql_config import info
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'narutocity',
-        'PASSWORD': '1234!@#$',
-        'HOST': '192.168.20.22',
-        'POST': '3306',
+        'NAME': info[0],
+        'PASSWORD': info[1],
+        'HOST': info[2],
+        'POST': info[3],
     }
 }
 
