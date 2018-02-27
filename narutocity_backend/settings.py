@@ -131,18 +131,16 @@ STATICFILES_DIRS = [
 # 跨域相关
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:8899',
-# )
+# CORS_ORIGIN_WHITELIST = ()
 
 CORS_ALLOW_METHODS = (
     'GET',
     'POST',
     'OPTIONS',
-    # 'PATCH',
-    # 'PUT',
-    # 'VIEW',
-    # 'DELETE',
+    'PATCH',
+    'PUT',
+    'VIEW',
+    'DELETE',
 )
 
 CORS_ALLOW_HEADERS = (
