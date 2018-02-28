@@ -24,7 +24,7 @@ SECRET_KEY = '2h@^i0a#ot(l!0q_8j2_t@%m^=s+5geb)7-e8$+eii3u)3kj8v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]  # 配置允许所有主机访问
 
 # Application definition
 
@@ -86,7 +86,6 @@ DATABASES = {
         'PASSWORD': info[2],
         'HOST': info[3],
         'POST': info[4],
-
     }
 }
 
