@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+from mysql_config import info
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -80,10 +80,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'narutocity',
-        'PASSWORD': '1234!@#$',
-        'HOST': '192.168.20.22',
-        'POST': '3306',
+        'NAME': info[0],
+        'USER': info[1],
+        'PASSWORD': info[2],
+        'HOST': info[3],
+        'POST': info[4],
     }
 }
 
