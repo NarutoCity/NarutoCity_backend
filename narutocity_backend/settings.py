@@ -24,7 +24,7 @@ SECRET_KEY = '2h@^i0a#ot(l!0q_8j2_t@%m^=s+5geb)7-e8$+eii3u)3kj8v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]  # 配置允许所有主机访问
 
 # Application definition
 
@@ -75,15 +75,17 @@ WSGI_APPLICATION = 'narutocity_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+from mysql_config import info  # 数据库配置
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'narutocity',
-        'PASSWORD': '1234!@#$',
-        'HOST': '192.168.20.22',
-        'POST': '3306',
+        'NAME': info[0],
+        'USER': info[1],
+        'PASSWORD': info[2],
+        'HOST': info[3],
+        'POST': info[4],
     }
 }
 
