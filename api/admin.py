@@ -4,5 +4,6 @@ from .models import *
 
 admin.site.register(
     [CourseSubCategory, CourseCategory, Course, CourseDetail, DegreeCourse, Scholarship, OftenAskedQuestion,
-     CourseOutline, CourseChapter, CourseSection, PricePolicy, Coupon, Teacher, ArticleSource, Article, Collection,
+     CourseOutline, CourseChapter, CourseSection, PricePolicy, Coupon, Teacher, CourseReview, DegreeCourseReview,
+     ArticleSource, Article, Collection,
      Comment, Account, UserAuthToken])
