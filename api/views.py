@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api import models
 
-from .serialize import courses
+from .serializers import courses
 
 
 class Login(APIView):
@@ -37,5 +37,3 @@ class CourseDetail(APIView):
             # 序列化数据
             ret = courses.CourseSerializer(instance=courseItem)
             return Response(ret.data)
-
-

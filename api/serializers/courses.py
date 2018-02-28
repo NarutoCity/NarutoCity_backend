@@ -4,6 +4,7 @@ from ..models import *
 
 class CourseCapterCharField(serializers.CharField):
     """章节"""
+
     def to_representation(self, instance):
         # instance是QuerySet对象
         data_list = []
@@ -14,6 +15,7 @@ class CourseCapterCharField(serializers.CharField):
 
 class QuestionCharField(serializers.CharField):
     """问题"""
+
     def to_representation(self, instance):
         # instance是QuerySet对象
         data_list = []
@@ -72,10 +74,3 @@ class CourseSerializer(serializers.ModelSerializer):
             data_list.append({'name': item.name, 'role': item.get_role_display(),
                               'image': item.image, 'signature': item.signature, 'brief': item.brief})
         return data_list
-
-
-
-
-
-
-
