@@ -73,6 +73,7 @@ class Course(models.Model):
     coupon = GenericRelation("Coupon")
     # 用于GenericForeignKey反向查询，不会生成表字段，切勿删除
     price_policy = GenericRelation("PricePolicy")
+    questions = GenericRelation("OftenAskedQuestion")
 
     def __str__(self):
         return "%s(%s)" % (self.name, self.get_course_type_display())
