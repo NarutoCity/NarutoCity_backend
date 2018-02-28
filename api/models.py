@@ -12,10 +12,6 @@ class CourseCategory(models.Model):
     def __str__(self):
         return "%s" % self.name
 
-    class Meta:
-        verbose_name = "课程大类"
-        verbose_name_plural = "课程大类"
-
 
 class CourseSubCategory(models.Model):
     """课程子类
@@ -27,15 +23,11 @@ class CourseSubCategory(models.Model):
     def __str__(self):
         return "%s" % self.name
 
-    class Meta:
-        verbose_name = "课程子类"
-        verbose_name_plural = "课程子类"
-
 
 class DegreeCourse(models.Model):
     """学位课"""
     name = models.CharField(max_length=128, unique=True)
-    course_img = models.CharField(max_length=255, verbose_name="缩略图")
+    course_img = models.CharField(max_length=255, verbose_name="缩略图", blank=True, null=True)
     brief = models.TextField(verbose_name="学位课程简介")
     total_scholarship = models.PositiveIntegerField(verbose_name="总奖学金(贝里)", default=40000)
     mentor_compensation_bonus = models.PositiveIntegerField(verbose_name="本课程的导师辅导费用(贝里)", default=15000)
@@ -63,7 +55,7 @@ class Scholarship(models.Model):
 class Course(models.Model):
     """普通课程"""
     name = models.CharField(max_length=128, unique=True)
-    course_img = models.CharField(max_length=255)
+    course_img = models.CharField(max_length=255, blank=True, null=True)
     sub_category = models.ForeignKey("CourseSubCategory")
     course_type_choices = ((0, '付费'), (1, 'VIP专享'), (2, '学位课程'))
     course_type = models.SmallIntegerField(choices=course_type_choices)
@@ -248,7 +240,7 @@ class Teacher(models.Model):
     role = models.SmallIntegerField(choices=role_choices, default=0)
     title = models.CharField(max_length=64, verbose_name="职位、职称")
     signature = models.CharField(max_length=255, help_text="导师签名", blank=True, null=True)
-    image = models.CharField(max_length=128)
+    image = models.CharField(max_length=128, null=True, blank=True)
     brief = models.TextField(max_length=1024)
 
     def __str__(self):
