@@ -75,17 +75,25 @@ WSGI_APPLICATION = 'narutocity_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+<<<<<<< HEAD
 from mysql_config import info  # 数据库配置
+=======
+# mysql配置文件，仅存放在本地
+from mysql_config import info
+
+>>>>>>> b2100f730e55356aa84e817a5acc74b5b29a5e10
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': info[0],
         'USER': info[1],
         'PASSWORD': info[2],
         'HOST': info[3],
         'POST': info[4],
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2100f730e55356aa84e817a5acc74b5b29a5e10
     }
 }
 
@@ -132,18 +140,16 @@ STATICFILES_DIRS = [
 # 跨域相关
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:8899',
-# )
+# CORS_ORIGIN_WHITELIST = ()
 
 CORS_ALLOW_METHODS = (
     'GET',
     'POST',
     'OPTIONS',
-    # 'PATCH',
-    # 'PUT',
-    # 'VIEW',
-    # 'DELETE',
+    'PATCH',
+    'PUT',
+    'VIEW',
+    'DELETE',
 )
 
 CORS_ALLOW_HEADERS = (
