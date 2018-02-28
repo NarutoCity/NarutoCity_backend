@@ -24,9 +24,7 @@ class Login(APIView):
 class Courses(APIView):
     def get(self, request, *args, **kwargs):
         courseList = models.Course.objects.all()
-        # print("====",courseList)
         ret = courses.CourseSerializer(instance=courseList, many=True)
-        print(ret.data)
         return Response(ret.data)
 
 
@@ -35,8 +33,9 @@ class CourseDetail(APIView):
         # 根据请求课程id判断返回数据
         pk = kwargs.get('pk')
         if pk:
-            courseDetail = models.CourseDetail.objects.get(id=pk)
-            print(type(courseDetail))
-            ret = courses.CourseDetailSerializer(instance=courseDetail)
-            print(ret.data)
+            courseItem = models.Course.objects.filter(id=pk).first()
+            # 序列化数据
+            ret = courses.CourseSerializer(instance=courseItem)
             return Response(ret.data)
+
+
