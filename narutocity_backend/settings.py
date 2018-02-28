@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+from mysql_config import info
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'narutocity_backend.settings'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'narutocity_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+from mysql_config import info
 
 # mysql配置文件，仅存放在本地
 from mysql_config import info
