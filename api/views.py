@@ -1,10 +1,11 @@
 import json, time, hashlib
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView
 
 from api import models
-from api.serializers import course_serializer, article_serializer
+from api.serializers import courses, articles
 
 
 class LoginView(APIView):
@@ -38,20 +39,20 @@ class LoginView(APIView):
         return Response(ret)
 
 
-class CourseViewSet(ModelViewSet):
+class CourseViewSet(ReadOnlyModelViewSet):
     """
     课程相关API视图
     """
     queryset = models.Course.objects.all()
-    serializer_class = course_serializer.CourseSerializer
+    serializer_class = courses.CourseSerializer
 
 
-class ArticleViewSet(ModelViewSet):
+class ArticleViewSet(ReadOnlyModelViewSet):
     """
     文章相关API视图
     """
     queryset = models.Article.objects.all()
-    serializer_class = article_serializer.ArticleSerializer
+    serializer_class = articles.ArticleSerializer
 
 # class ArticlesView(APIView):
 #     """深科技展示页"""

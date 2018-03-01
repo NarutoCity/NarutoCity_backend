@@ -3,34 +3,32 @@ from rest_framework.serializers import CharField, SerializerMethodField
 from api.models import Course
 
 
-class CourseChapterCharField(CharField):
-    """章节"""
-
-    def to_representation(self, instance):
-        """
-        :param instance:QuerySet对象
-        """
-        data_list = []
-        for row in instance:
-            data_list.append({'price': row.price, 'valid_period': row.get_valid_period_display()})
-        return data_list
-
-
-class QuestionCharField(CharField):
-    """问题"""
-
-    def to_representation(self, instance):
-        """
-        :param instance:QuerySet对象
-        """
-        data_list = []
-        for row in instance:
-            data_list.append({'question': row.question, 'answer': row.answer})
-        return data_list
-
-
 class CourseSerializer(serializers.ModelSerializer):
     """获取一条记录对象"""
+
+    class CourseChapterCharField(CharField):
+        """章节"""
+
+        def to_representation(self, instance):
+            """
+            :param instance:QuerySet对象
+            """
+            data_list = []
+            for row in instance:
+                data_list.append({'price': row.price, 'valid_period': row.get_valid_period_display()})
+            return data_list
+
+    class QuestionCharField(CharField):
+        """问题"""
+
+        def to_representation(self, instance):
+            """
+            :param instance:QuerySet对象
+            """
+            data_list = []
+            for row in instance:
+                data_list.append({'question': row.question, 'answer': row.answer})
+            return data_list
 
     class Meta:
         model = Course

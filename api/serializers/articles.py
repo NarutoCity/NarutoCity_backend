@@ -26,4 +26,4 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.get_position_display()
 
 # 还需要添加的数据：
-# 评论数、上线时间（2小时前）、、、
+# 评论数、上线时间（2小时前）
