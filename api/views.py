@@ -1,41 +1,10 @@
-import json, datetime, time, hashlib
-from django.http import JsonResponse
+import json, time, hashlib
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+
 from api import models
-
-from .serializers import courses
-
-
-class Login(APIView):
-    def get(self, request, *args, **kwargs):
-        return Response('login')
-
-    def post(self, request):
-        username = request.data['username']
-        password = request.data['password']
-        print(username, password)
-        if username == '123' and password == '123':
-            return Response('登录成功')
-        return Response('用户名或密码错误')
-
-
-class Courses(APIView):
-    def get(self, request, *args, **kwargs):
-        courseList = models.Course.objects.all()
-        ret = courses.CourseSerializer(instance=courseList, many=True)
-        return Response(ret.data)
-
-
-class CourseDetail(APIView):
-    def get(self, request, *args, **kwargs):
-        # 根据请求课程id判断返回数据
-        pk = kwargs.get('pk')
-        if pk:
-            courseItem = models.Course.objects.filter(id=pk).first()
-            # 序列化数据
-            ret = courses.CourseSerializer(instance=courseItem)
-            return Response(ret.data)
+from api.serializers import course_serializer
 
 
 class LoginView(APIView):
@@ -66,7 +35,12 @@ class LoginView(APIView):
                 'msg': "用户名或者密码错误"
             }
 
-        return JsonResponse(ret)
+        return Response(ret)
+
+
+class CourseViewSet(ModelViewSet):
+    queryset = models.Course.objects.all()
+    serializer_class = course_serializer.CourseSerializer
 
 
 class ArticlesView(APIView):
@@ -88,7 +62,7 @@ class ArticlesView(APIView):
             temp["head_img"] = article.head_img
             temp["comment_num"] = article.comment_num
             ret['data']['results'].append(temp)
-        return JsonResponse(ret, json_dumps_params={"ensure_ascii": False})
+        return Response(ret)
 
 
 class ArticleView(APIView):
@@ -96,8 +70,8 @@ class ArticleView(APIView):
 
     def get(self, request, *args, **kwargs):
         ret = {"error_no": 0, "data": {}}
-        nid = kwargs.get('nid')
-        article = models.Article.objects.get(id=nid)
+        pk = kwargs.get('pk')
+        article = models.Article.objects.get(id=pk)
         ret["data"]["id"] = article.id
         ret["data"]["title"] = article.title
         ret["data"]["brief"] = article.brief
@@ -109,4 +83,19 @@ class ArticleView(APIView):
         ret["data"]["comment_num"] = article.comment_num
         ret["data"]["content"] = article.content
         ret["data"]["up_num"] = article.agree_num
-        return JsonResponse(ret, json_dumps_params={"ensure_ascii": False})
+        return Response(ret)
+
+# class Courses(APIView):
+#     def get(self, request, *args, **kwargs):
+#         courseList = models.Course.objects.all()
+#         ret = course_serializer.CourseSerializer(instance=courseList, many=True)
+#         return Response(ret.data)
+#
+#
+# class CourseDetail(APIView):
+#     def get(self, request, *args, **kwargs):
+#         # 根据请求课程id判断返回数据
+#         courseItem = models.Course.objects.filter(id=pk).first()
+#         # 序列化数据
+#         ret = course_serializer.CourseSerializer(instance=courseItem)
+#         return Response(ret.data)
