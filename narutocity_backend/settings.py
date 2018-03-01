@@ -74,7 +74,6 @@ WSGI_APPLICATION = 'narutocity_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-from mysql_config import info
 
 # mysql配置文件，仅存放在本地
 from mysql_config import info
