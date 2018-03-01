@@ -21,15 +21,15 @@ from api import views
 
 router = DefaultRouter()
 router.register(r'courses', views.CourseViewSet)
-# router.register(r'articles',views.ArticlesViewSet)
+router.register(r'articles', views.ArticleViewSet)
 
 urlpatterns = [
-    url(r'^login/', views.LoginView.as_view()),
-
     url(r'^', include(router.urls)),
 
-    url(r'^articles/$', views.ArticlesView.as_view()),
-    url(r'^article/(?P<pk>\d+)/$', views.ArticleView.as_view()),
+    url(r'^login/', views.LoginView.as_view()),
+
+    # url(r'^articles/$', views.ArticlesView.as_view()),
+    # url(r'^article/(?P<pk>\d+)/$', views.ArticleView.as_view()),
     # url(r'^courses/$', views.Course.as_view()),
     # url(r'^coursedetail/(?P<pk>\d+)/$', views.CourseDetail.as_view()),
 

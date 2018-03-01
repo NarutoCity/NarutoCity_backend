@@ -1,8 +1,9 @@
 from rest_framework import serializers
+from rest_framework.serializers import CharField, SerializerMethodField
 from api.models import Course
 
 
-class CourseChapterCharField(serializers.CharField):
+class CourseChapterCharField(CharField):
     """章节"""
 
     def to_representation(self, instance):
@@ -15,7 +16,7 @@ class CourseChapterCharField(serializers.CharField):
         return data_list
 
 
-class QuestionCharField(serializers.CharField):
+class QuestionCharField(CharField):
     """问题"""
 
     def to_representation(self, instance):
@@ -33,41 +34,35 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'course_img', 'brief', 'level', 'course_type', 'pub_date', 'period', 'order',
-                  'attachment_path', 'status', 'template_id', 'sub_category',
-                  'hours', 'why_study', 'what_to_study_brief', 'career_improvement', 'prerequisite',
-                  'recommend_courses', 'teachers', 'price_policy', 'questions',
-                  ]
+        fields = '__all__'
 
-    level = serializers.SerializerMethodField()
-    course_type = serializers.SerializerMethodField()
-    hours = serializers.CharField(source="coursedetail.hours")
-    why_study = serializers.CharField(source="coursedetail.why_study")
-    what_to_study_brief = serializers.CharField(source="coursedetail.career_improvement")
-    career_improvement = serializers.CharField(source="coursedetail.career_improvement")
-    prerequisite = serializers.CharField(source="coursedetail.prerequisite")
+    level = SerializerMethodField()
+    course_type = SerializerMethodField()
+    video_brief_link = CharField(source="coursedetail.video_brief_link")
+    hours = CharField(source="coursedetail.hours")
 
-    recommend_courses = serializers.SerializerMethodField()
-    teachers = serializers.SerializerMethodField()
+    course_slogan = CharField(source="coursedetail.course_slogan")
+    why_study = CharField(source="coursedetail.why_study")
+    what_to_study_brief = CharField(source="coursedetail.what_to_study_brief")
+    career_improvement = CharField(source="coursedetail.career_improvement")
+    recommend_courses = SerializerMethodField()
+    prerequisite = CharField(source="coursedetail.prerequisite")
+    teachers = SerializerMethodField()
     price_policy = CourseChapterCharField(source="price_policy.all")
     questions = QuestionCharField(source="questions.all")
 
     def get_level(self, obj):
         """课程难度级别"""
-
         return obj.get_level_display()
 
     def get_course_type(self, obj):
         """课程类型"""
-
         return obj.get_course_type_display()
 
     def get_recommend_courses(self, obj):
         """推荐课程"""
-
         return obj.coursedetail.recommend_courses.values('id', 'name')
 
     def get_teachers(self, obj):
         """讲师"""
-
         return obj.coursedetail.teachers.values('name', 'role', 'image', 'signature')
