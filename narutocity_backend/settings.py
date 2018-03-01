@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 from mysql_config import info
 import os
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'narutocity_backend.settings'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

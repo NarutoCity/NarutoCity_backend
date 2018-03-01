@@ -456,7 +456,6 @@ class EnrolledCourse(models.Model):
     status = models.SmallIntegerField(choices=status_choices, default=0)
     order_detail = models.OneToOneField("OrderDetail")  # 使订单购买后支持 课程评价
 
-
     def __str__(self):
         return "%s:%s" % (self.account, self.course)
 
