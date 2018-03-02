@@ -159,3 +159,8 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'Pragma',
 )
+
+REST_FRAMEWORK={
+    "DEFAULT_PARSER_CLASSES":["rest_framework.parsers.JSONParser"],
+
+}

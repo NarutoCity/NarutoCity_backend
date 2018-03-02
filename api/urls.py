@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^login/', views.LoginView.as_view()),
     url(r'^articles/', views.ArticlesView.as_view()),
     url(r'^article/(?P<nid>\d+)/$', views.ArticleView.as_view()),
+    url(r'^shopping_car/$', views.ShoppingCarView.as_view()),
 ]
