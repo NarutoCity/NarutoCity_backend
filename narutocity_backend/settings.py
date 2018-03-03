@@ -158,3 +158,22 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'Pragma',
 )
+
+# Redis缓存配置
+# Redis配置文件，仅存放在本地
+from local_config import redis_config
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://{}:{}".format(redis_config['HOST'], redis_config['POST']),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": redis_config['PASSWORD'],
+            "CONNECTION_POOL_KWARGS": {"max_connections": 5},
+        }
+    }
+}
+
+REDIS_SHOPPING_CAR_KEY = "shopping_car"
+REDIS_PAYMENT_KEY = "payment"

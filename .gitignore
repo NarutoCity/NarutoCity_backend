@@ -104,4 +104,4 @@ ENV/
 /.idea
 *.sqlite3
 */migrations
-mysql_config.py
+local_config.py
